@@ -13,11 +13,11 @@ class PaytmPayments {
       return null;
 
     if(customerId.isEmpty){
-      customerId = "456aeBd7";
+      customerId = generateCustomerId();
     }
 
     if(orderId.isEmpty){
-      orderId = "7da654";
+      orderId = generateOrderId();
     }
 
     // setup callback url
@@ -57,5 +57,17 @@ class PaytmPayments {
     var res = await http.post(url, body: paymentObject);
 
     return convert.jsonDecode(res.body)["CHECKSUMHASH"];
+  }
+
+  // generates a random customer ID
+  static String generateCustomerId() {
+
+    return "12345";
+  }
+
+  // generates a random order ID
+  static String generateOrderId() {
+
+    return "67890";
   }
 }

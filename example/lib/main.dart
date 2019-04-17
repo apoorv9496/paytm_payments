@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:paytm_payments/paytm_payments.dart';
 
 void main() => runApp(MyApp());
@@ -12,12 +10,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
 
   @override
   void initState() {
     super.initState();
-
     initPayment();
   }
 
@@ -28,14 +24,19 @@ class _MyAppState extends State<MyApp> {
     try {
 
       await PaytmPayments.makePaytmPayment(
-        "[YOUR_MERCHANT_ID]",
-        "[YOUR_CHECKSUM_URL]",
-        customerId: "[UNIQUE_ID_FOR_YOUR_CUSTOMER]",
-        orderId: "[UNIQUE_ID_FOR_YOUR_ORDER]",
-        staging: false,
+        "[YOUR_MERCHANT_ID]", // required field
+        "[YOUR_CHECKSUM_URL]", // required field
+        customerId: "[UNIQUE_ID_FOR_YOUR_CUSTOMER]", // auto generated if not specified
+        orderId: "[UNIQUE_ID_FOR_YOUR_ORDER]", // auto generated if not specified
+        txnAmount: "10.0", // default: 10
+        channelId: "WAP", // default: WAP
+        industryTypeId: "Retail", // default: Retail
+        website: "APPSTAGING", // default: APPSTAGING
+        staging: false, // default: true (by default paytm staging environment is used)
       );
     } on Exception {
 
+      print("Some error occurred");
     }
 
     // If the widget was removed from the tree while the asynchronous platform
