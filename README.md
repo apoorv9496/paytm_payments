@@ -17,6 +17,27 @@ To use this package :
     paytm_payments:
 ```
 
+* add following permissions to you AndroidManifest.xml file.
+
+```xml
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="xyz.ajax.paytm_payments_example">
+    
+        <!-- Include these permissions in your manifest file -->
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        <uses-permission android:name="android.permission.READ_SMS"/>
+        <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+        
+        <application></application>
+    </manifest>
+```
+
+* Host a checksum generation file which will become your checksum URL which is one of the 2 required fields.
+
+See Step- 5 of [Paytm Developer Generate Checksum Url](https://developer.paytm.com/docs/v1/android-sdk)
+For any assistance with this step mail me at the give email address.
+
 # License
 
     Copyright 2019 Apoorv Jain
