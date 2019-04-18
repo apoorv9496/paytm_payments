@@ -38,6 +38,14 @@ To use this package :
 See Step- 5 of [Paytm Developer Generate Checksum Url](https://developer.paytm.com/docs/v1/android-sdk)
 For any assistance with this step mail me at the give email address.
 
+You may use the url with MID provided in example app to test the working of paytm staging environment.
+Note that you are supposed to use test credentials with the staging setup for loggin into paytm.
+
+Test Credentials:
+
+    Number: 7777777777
+    OTP: 489871
+
 # License
 
     Copyright 2019 Apoorv Jain

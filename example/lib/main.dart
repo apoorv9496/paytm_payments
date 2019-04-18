@@ -24,10 +24,10 @@ class _MyAppState extends State<MyApp> {
     try {
 
       await PaytmPayments.makePaytmPayment(
-        "", // [YOUR_MERCHANT_ID] (required field)
-        "", // [YOUR_CHECKSUM_URL] (required field)
-        customerId: "", // [UNIQUE_ID_FOR_YOUR_CUSTOMER] (auto generated if not specified)
-        orderId: "", // [UNIQUE_ID_FOR_YOUR_ORDER] (auto generated if not specified)
+        "rxazcv89315285244163", // [YOUR_MERCHANT_ID] (required field)
+        "https://ajax8732.000webhostapp.com/generateChecksum.php", // [YOUR_CHECKSUM_URL] (required field)
+        customerId: "56789", // [UNIQUE_ID_FOR_YOUR_CUSTOMER] (auto generated if not specified)
+        orderId: "51234", // [UNIQUE_ID_FOR_YOUR_ORDER] (auto generated if not specified)
         txnAmount: "10.0", // default: 10.0
         channelId: "WAP", // default: WAP (STAGING value)
         industryTypeId: "Retail", // default: Retail (STAGING value)

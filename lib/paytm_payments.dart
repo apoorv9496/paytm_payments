@@ -7,7 +7,7 @@ import 'dart:convert' as convert;
 class PaytmPayments {
   static const MethodChannel _channel = const MethodChannel('paytm_payments');
 
-  static Future<Null> makePaytmPayment(String merchantId, String checksumUrl, {String website = "APPSTAGING", String industryTypeId = "Retail", String channelId = "WAP", String customerId = "", String orderId = "", String txnAmount = "10", String mobileNumber = "", String email = "", bool staging = false}) async {
+  static Future<Null> makePaytmPayment(String merchantId, String checksumUrl, {String website = "APPSTAGING", String industryTypeId = "Retail", String channelId = "WAP", String customerId = "", String orderId = "", String txnAmount = "10", String mobileNumber = "", String email = "", bool staging = true}) async {
 
     if(merchantId == null || checksumUrl == null)
       return null;
@@ -47,7 +47,7 @@ class PaytmPayments {
       "CHECKSUMHASH" : checksumHash,
     });
 
-    final String response = await _channel.invokeMethod('paytmPayment', {"order_data" : paymentObject, "staging" : staging,},);
+    await _channel.invokeMethod('paytmPayment', {"order_data" : paymentObject, "staging" : staging,},);
 
     return null;
   }
