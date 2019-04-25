@@ -14,7 +14,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPayment();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -24,15 +23,15 @@ class _MyAppState extends State<MyApp> {
     try {
 
       await PaytmPayments.makePaytmPayment(
-        "rxazcv89315285244163", // [YOUR_MERCHANT_ID] (required field)
-        "https://ajax8732.000webhostapp.com/generateChecksum.php", // [YOUR_CHECKSUM_URL] (required field)
-        customerId: "56789", // [UNIQUE_ID_FOR_YOUR_CUSTOMER] (auto generated if not specified)
-        orderId: "51234", // [UNIQUE_ID_FOR_YOUR_ORDER] (auto generated if not specified)
+        "Marvey03866177885344", // [YOUR_MERCHANT_ID] (required field)
+        "https://ajax8732.000webhostapp.com/generateChecksum.php", //"https://www.maroonaid.org/paytm/generateChecksum.php", // [YOUR_CHECKSUM_URL] (required field)
+        customerId: "919958034627", // [UNIQUE_ID_FOR_YOUR_CUSTOMER] (auto generated if not specified)
+        orderId: DateTime.now().millisecondsSinceEpoch.toString(), // [UNIQUE_ID_FOR_YOUR_ORDER] (auto generated if not specified)
         txnAmount: "10.0", // default: 10.0
         channelId: "WAP", // default: WAP (STAGING value)
-        industryTypeId: "Retail", // default: Retail (STAGING value)
-        website: "APPSTAGING", // default: APPSTAGING (STAGING value)
-        staging: true, // default: true (by default paytm staging environment is used)
+        industryTypeId: "Retail109", // default: Retail (STAGING value)
+        website: "APPPROD", // default: APPSTAGING (STAGING value)
+        staging: false, // default: true (by default paytm staging environment is used)
       );
     } on Exception {
 
@@ -50,10 +49,15 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Paytm Payment Plugin'),
+          title: const Text('Paytm Payment'),
         ),
         body: Center(
-          child: Text('Exmaple App'),
+          child: RaisedButton(
+            onPressed: (){
+              initPayment();
+            },
+            child: Text("Make Payment"),
+          ),
         ),
       ),
     );
