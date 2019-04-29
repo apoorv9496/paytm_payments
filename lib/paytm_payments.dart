@@ -68,6 +68,6 @@ class PaytmPayments {
   // generates a random order ID
   static String generateOrderId() {
 
-    return "67890";
+    return DateTime.now().millisecondsSinceEpoch.toString();
   }
 }

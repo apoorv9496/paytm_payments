@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/paytm_payments.iml" filepath="$PROJECT_DIR$/paytm_payments.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/paytm_payments_android.iml" filepath="$PROJECT_DIR$/android/paytm_payments_android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/example/android/paytm_payments_example_android.iml" filepath="$PROJECT_DIR$/example/android/paytm_payments_example_android.iml" />
     </modules>
   </component>
 </project>
