@@ -1,6 +1,6 @@
 name: paytm_payments
 description: Paytm Payments Flutter SDK. Setup up staging and production environment one after the other with very easy to use function call.
-version: 0.1.0
+version: 0.2.0
 author: Apoorv Jain <ajax8732@gmail.com>
 homepage: https://github.com/apoorv9496/paytm_payments
 
