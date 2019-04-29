@@ -5,8 +5,14 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class PaytmPayments {
+
+  // Channel to communicate with Native code
   static const MethodChannel _channel = const MethodChannel('paytm_payments');
 
+  /* makePaytmPayment can be used to:
+  * Make payments using staging environment, staging test is required to be done before receiving the production details from paytm
+  * Make production environment payments too by setting staging param to true
+  * */
   static Future<Null> makePaytmPayment(String merchantId, String checksumUrl, {String website = "APPSTAGING", String industryTypeId = "Retail", String channelId = "WAP", String customerId = "", String orderId = "", String txnAmount = "10", String mobileNumber = "", String email = "", bool staging = true}) async {
 
     if(merchantId == null || checksumUrl == null)
@@ -27,7 +33,7 @@ class PaytmPayments {
     else
       callBackUrl = "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=$orderId";
 
-    // build payment object (STAGING)
+    // build payment object
     Map<String, String> paymentObject = {
       "MID" : merchantId,
       "ORDER_ID" : orderId,
@@ -42,11 +48,12 @@ class PaytmPayments {
     // get checksum hash
     String checksumHash = await generateChecksum(checksumUrl, paymentObject);
 
-    // update payment object
+    // update payment object with checksumhash value
     paymentObject.addAll({
       "CHECKSUMHASH" : checksumHash,
     });
 
+    // initiate payment
     await _channel.invokeMethod('paytmPayment', {"order_data" : paymentObject, "staging" : staging,},);
 
     return null;
@@ -62,7 +69,7 @@ class PaytmPayments {
   // generates a random customer ID
   static String generateCustomerId() {
 
-    return "12345";
+    return (DateTime.now().millisecondsSinceEpoch / 1000).toString();
   }
 
   // generates a random order ID

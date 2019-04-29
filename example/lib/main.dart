@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         customerId: "12345", // [UNIQUE_ID_FOR_YOUR_CUSTOMER] (auto generated if not specified)
         orderId: DateTime.now().millisecondsSinceEpoch.toString(), // [UNIQUE_ID_FOR_YOUR_ORDER] (auto generated if not specified)
         txnAmount: "10.0", // default: 10.0
-        channelId: "WAP", // default: WAP (same for STAGING & PRODUCTION)
+        channelId: "WAP", // default: WAP (STAGING value)
         industryTypeId: "Retail", // default: Retail (STAGING value)
         website: "APPSTAGING", // default: APPSTAGING (STAGING value)
         staging: true, // default: true (by default paytm staging environment is used)

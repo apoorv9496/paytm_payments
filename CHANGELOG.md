@@ -5,4 +5,9 @@
 ## 0.1.0
 
 * Tested Staging Environment.
-* Hosted php based checksum Urls. Example call to 'makePaytmPayment' works with default values too.  
+* Hosted php based checksum Urls. Example call to 'makePaytmPayment' works with default values too.
+
+## 0.2.0
+
+* Production environment fixed and tested
+* Now generate random customer and order IDs too.
