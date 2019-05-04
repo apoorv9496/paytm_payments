@@ -11,3 +11,8 @@
 
 * Production environment fixed and tested
 * Now generate random customer and order IDs too.
+
+## 0.2.1
+
+* Option to disable Transaction Response Toast message added.
+* Method Channel call fixed.

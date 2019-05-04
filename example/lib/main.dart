@@ -32,7 +32,9 @@ class _MyAppState extends State<MyApp> {
         industryTypeId: "Retail", // default: Retail (STAGING value)
         website: "APPSTAGING", // default: APPSTAGING (STAGING value)
         staging: true, // default: true (by default paytm staging environment is used)
+        showToast: true, // default: true (by default shows callback messages from paytm in Android Toasts)
       );
+
     } on Exception {
 
       print("Some error occurred");

@@ -44,6 +44,7 @@ public class PaytmPaymentsPlugin implements MethodCallHandler {
 
       HashMap<String, String> orderData = call.argument("order_data");
       boolean staging = call.argument("staging");
+      final boolean showToast = call.argument("show_toast");
 
       // instance of service
       PaytmPGService Service;
@@ -67,7 +68,10 @@ public class PaytmPaymentsPlugin implements MethodCallHandler {
           public void onTransactionResponse(Bundle inResponse) {
               /*Display the message as below */
               Log.i(TAG, "onTransactionResponse: " + inResponse.toString());
-              Toast.makeText(activity, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+
+              if(showToast){
+                  Toast.makeText(activity, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+              }
           }
 
           public void networkNotAvailable() {

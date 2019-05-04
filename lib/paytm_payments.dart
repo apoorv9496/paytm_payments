@@ -13,7 +13,7 @@ class PaytmPayments {
   * Make payments using staging environment, staging test is required to be done before receiving the production details from paytm
   * Make production environment payments too by setting staging param to true
   * */
-  static Future<Null> makePaytmPayment(String merchantId, String checksumUrl, {String website = "APPSTAGING", String industryTypeId = "Retail", String channelId = "WAP", String customerId = "", String orderId = "", String txnAmount = "10", String mobileNumber = "", String email = "", bool staging = true}) async {
+  static Future<Null> makePaytmPayment(String merchantId, String checksumUrl, {String website = "APPSTAGING", String industryTypeId = "Retail", String channelId = "WAP", String customerId = "", String orderId = "", String txnAmount = "10", String mobileNumber = "", String email = "", bool staging = true, bool showToast = true}) async {
 
     if(merchantId == null || checksumUrl == null)
       return null;
@@ -54,7 +54,7 @@ class PaytmPayments {
     });
 
     // initiate payment
-    await _channel.invokeMethod('paytmPayment', {"order_data" : paymentObject, "staging" : staging,},);
+    _channel.invokeMethod('paytmPayment', {"order_data" : paymentObject, "staging" : staging, "show_toast" : showToast},);
 
     return null;
   }
