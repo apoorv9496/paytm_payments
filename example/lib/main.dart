@@ -18,8 +18,20 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPayment() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
+
+    PaytmPayments.responseStream.listen((String responseData){
+
+      print(responseData);
+
+      /*
+      * Call any method here to handle payment process on receiving response. According to the response received.
+      *
+      * handleResponse();
+      *
+      * */
+    });
+
+    // try/catch any Exceptions.
     try {
 
       await PaytmPayments.makePaytmPayment(

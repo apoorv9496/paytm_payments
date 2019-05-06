@@ -16,3 +16,7 @@
 
 * Option to disable Transaction Response Toast message added.
 * Method Channel call fixed.
+
+## 0.3.0
+
+* Now you can listen for the transaction status response using 'PaytmPayments.responseStream.listen'.

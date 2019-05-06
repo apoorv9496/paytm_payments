@@ -23,23 +23,23 @@ import static android.content.ContentValues.TAG;
 /** PaytmPaymentsPlugin */
 public class PaytmPaymentsPlugin implements MethodCallHandler {
 
-    private MethodChannel channel;
+    static private MethodChannel channel;
     private Activity activity;
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "paytm_payments");
+    channel = new MethodChannel(registrar.messenger(), "paytm_payments");
     channel.setMethodCallHandler(new PaytmPaymentsPlugin(registrar.activity(), channel));
   }
 
   private PaytmPaymentsPlugin(Activity activity, MethodChannel channel){
       this.activity = activity;
-      this.channel = channel;
-      this.channel.setMethodCallHandler(this);
+      PaytmPaymentsPlugin.channel = channel;
+      PaytmPaymentsPlugin.channel.setMethodCallHandler(this);
   }
 
   @Override
-  public void onMethodCall(MethodCall call, Result result) {
+  public void onMethodCall(MethodCall call, final Result result) {
     if(call.method.equals("paytmPayment")){
 
       HashMap<String, String> orderData = call.argument("order_data");
@@ -47,7 +47,7 @@ public class PaytmPaymentsPlugin implements MethodCallHandler {
       final boolean showToast = call.argument("show_toast");
 
       // instance of service
-      PaytmPGService Service;
+      final PaytmPGService Service;
       if(staging)
           Service = PaytmPGService.getStagingService();
       else
@@ -71,6 +71,14 @@ public class PaytmPaymentsPlugin implements MethodCallHandler {
 
               if(showToast){
                   Toast.makeText(activity, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+              }
+
+              String res = inResponse.getString("STATUS");
+
+              try {
+                  result.success(res);
+              } catch (Exception e){
+                  System.out.println(e);
               }
           }
 
