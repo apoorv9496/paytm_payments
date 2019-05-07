@@ -9,9 +9,9 @@ class PaytmPayments {
   // Channel to communicate with Native code
   static const MethodChannel _channel = const MethodChannel('paytm_payments');
 
-  static StreamController<String> responseController = StreamController<String>();
-  static Stream<String> get responseStream => responseController.stream;
-  static Sink<String> get responseSink => responseController.sink;
+  static StreamController<Map<dynamic,dynamic>> responseController = StreamController<Map<dynamic,dynamic>>.broadcast();
+  static Stream<Map<dynamic,dynamic>> get responseStream => responseController.stream;
+  static Sink<Map<dynamic,dynamic>> get responseSink => responseController.sink;
 
   /* makePaytmPayment can be used to:
   * Make payments using staging environment, staging test is required to be done before receiving the production details from paytm
@@ -58,7 +58,7 @@ class PaytmPayments {
     });
 
     // initiate payment
-    String res = await _channel.invokeMethod('paytmPayment', {"order_data" : paymentObject, "staging" : staging, "show_toast" : showToast},);
+    Map<dynamic, dynamic> res = await _channel.invokeMethod('paytmPayment', {"order_data" : paymentObject, "staging" : staging, "show_toast" : showToast},);
     responseSink.add(res);
 
     return null;

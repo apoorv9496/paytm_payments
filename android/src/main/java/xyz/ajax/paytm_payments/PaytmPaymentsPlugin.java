@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -63,17 +64,34 @@ public class PaytmPaymentsPlugin implements MethodCallHandler {
           public void someUIErrorOccurred(String inErrorMessage) {
               /*Display the error message as below */
               Toast.makeText(activity, "UI Error " + inErrorMessage , Toast.LENGTH_LONG).show();
+
+              HashMap<String, String> res = new HashMap<String, String>();
+              res.put("RESPMSG", "UI Error");
+
+              try {
+                  result.success(res);
+              } catch (Exception e){
+                  System.out.println(e);
+              }
           }
 
           public void onTransactionResponse(Bundle inResponse) {
               /*Display the message as below */
               Log.i(TAG, "onTransactionResponse: " + inResponse.toString());
 
-              if(showToast){
+              if(showToast)
                   Toast.makeText(activity, "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
-              }
 
-              String res = inResponse.getString("STATUS");
+              HashMap<String, String> res = new HashMap<String, String>();
+
+              Set<String> keys = inResponse.keySet();
+              for (String key : keys) {
+                  try {
+                      res.put(key, inResponse.getString(key));
+                  } catch(Exception e) {
+                      //Handle exception here
+                  }
+              }
 
               try {
                   result.success(res);
@@ -83,28 +101,50 @@ public class PaytmPaymentsPlugin implements MethodCallHandler {
           }
 
           public void networkNotAvailable() {
+
               /*Display the message as below */
-              Toast.makeText(activity, "Network connection error: Check your internet connectivity", Toast.LENGTH_LONG).show();
+              if(showToast)
+                  Toast.makeText(activity, "Network connection error: Check your internet connectivity", Toast.LENGTH_LONG).show();
+
+              HashMap<String, String> res = new HashMap<String, String>();
+              res.put("RESPMSG", "Network connection error: Check your internet connectivity");
           }
 
           public void clientAuthenticationFailed(String inErrorMessage) {
               /*Display the message as below */
-              Toast.makeText(activity, "Authentication failed: Server error", Toast.LENGTH_LONG).show();
+              if(showToast){
+                  Toast.makeText(activity, "Authentication failed: Server error", Toast.LENGTH_LONG).show();
+              }
+
+              HashMap<String, String> res = new HashMap<String, String>();
+              res.put("RESPMSG", "Authentication failed: Server error");
           }
 
           public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl) {
               /*Display the message as below */
-              Toast.makeText(activity, "Unable to load webpage ", Toast.LENGTH_LONG).show();
+              if(showToast)
+                  Toast.makeText(activity, "Unable to load webpage ", Toast.LENGTH_LONG).show();
+
+              HashMap<String, String> res = new HashMap<String, String>();
+              res.put("RESPMSG", "Unable to load webpage ");
           }
 
           public void onBackPressedCancelTransaction() {
               /*Display the message as below */
-              Toast.makeText(activity, "Transaction cancelled" , Toast.LENGTH_LONG).show();
+              if(showToast)
+                  Toast.makeText(activity, "Transaction cancelled" , Toast.LENGTH_LONG).show();
+
+              HashMap<String, String> res = new HashMap<String, String>();
+              res.put("RESPMSG", "Transaction Cancelled");
           }
 
           public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
               /*Display the message as below */
-              Toast.makeText(activity, "Transaction Cancelled" + inResponse.toString(), Toast.LENGTH_LONG).show();
+              if(showToast)
+                  Toast.makeText(activity, "Transaction Cancelled" + inResponse.toString(), Toast.LENGTH_LONG).show();
+
+              HashMap<String, String> res = new HashMap<String, String>();
+              res.put("RESPMSG", "Transaction Cancelled");
           }
       });
     }

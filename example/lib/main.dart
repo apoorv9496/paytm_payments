@@ -14,22 +14,33 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
+    setResponseListener();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPayment() async {
+  void setResponseListener(){
 
-    PaytmPayments.responseStream.listen((String responseData){
+    // setting a listener on payment response
+    PaytmPayments.responseStream.listen((Map<dynamic, dynamic> responseData){
 
       print(responseData);
 
       /*
-      * Call any method here to handle payment process on receiving response. According to the response received.
+      * {RESPMSG : [MSG]} // this is the type of map object received, except for one case.
       *
+      * In this unique case, Transaction Response is received of the format:
+      * {CURRENCY: INR, ORDERID: 1557210948833, STATUS: TXN_FAILURE, BANKTXNID: , RESPMSG: Invalid checksum, MID: rxazcv89315285244163, RESPCODE: 330, TXNAMOUNT: 10.00}
+      *
+      * Call any method here to handle payment process on receiving response. According to the response received.
       * handleResponse();
       *
       * */
     });
+  }
+
+  // method to initiate payment
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPayment() async {
 
     // try/catch any Exceptions.
     try {
